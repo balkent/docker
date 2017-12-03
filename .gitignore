@@ -1,0 +1,29 @@
+################################
+#  Source of you project
+################################
+/src/*
+!/src/.gitkeep
+
+################################
+#  Volumes
+################################
+/docker/volume/*
+!/docker/volume/.gitkeep
+
+################################
+#  Environement Files
+################################
+/docker/mysql/sf_mysql.env
+/docker/apache/sf_mail.env
+/docker/php/sf.env
+
+################################
+#  Mac Files
+################################
+.DS_Store
+
+################################
+#  Sublime Test Files
+################################
+*.sublime-project
+*.sublime-workspace

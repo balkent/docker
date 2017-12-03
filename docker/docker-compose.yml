@@ -1,0 +1,46 @@
+version: "2"
+
+services:
+  web:
+    container_name: projet_web
+    build:
+      context: ./php/
+      dockerfile: ./Dockerfile
+    ports:
+      - "10000:80"
+    volumes:
+      - ./bash/.bashrc:/root/.bashrc
+      - ./bash/entrypoint.sh:/entrypoint.sh
+      - ./apache/local.dev.conf:/etc/apache2/sites-enabled/local.dev.conf
+      - ../src:/var/www/html
+      - ./php/php.ini:/etc/php5/apache2/conf.d/30-custom.ini
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+    environment:
+      - ALLOW_OVERRIDE=true
+      - SECRET=AAAAAAAAAAAA
+    env_file:
+      - ./mysql/sf_mysql.env
+      - ./apache/sf_mail.env
+      - ./php/sf.env
+    links:
+      - db:db
+      - maildev:maildev
+
+  db:
+    container_name: projet_db
+    image: mysql:5.5
+    volumes:
+      - ./volume/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=projet
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=UnTrucDrole
+    ports:
+      - "10001:3306"
+
+  maildev:
+    container_name: projet_mail
+    image: djfarrelly/maildev
+    ports:
+        - "10002:80"
