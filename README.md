@@ -4,6 +4,8 @@ debian, php5.6.30, apache2.1, mysql5.5
 
 > git clone git@github.com:QuentinBALCEREK/docker.git
 
+> cd docker
+
 > cp docker/mysql/sf_mysql.env.dist docker/mysql/sf_mysql.env
 
 > cp docker/apache/sf_mail.env.dist docker/apache/sf_mail.env
