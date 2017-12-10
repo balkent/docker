@@ -1,4 +1,4 @@
-FROM php:5.6.30-apache
+FROM php:7.2-apache
 
 RUN apt-get update && apt-get install -y
-RUN docker-php-ext-install -j$(nproc) mysql pdo pdo_mysql
+RUN docker-php-ext-install -j$(nproc) mysql-client pdo pdo_mysql
