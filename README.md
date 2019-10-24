@@ -13,10 +13,14 @@ MariaDB 5.5
 
 > cp docker/apache/sf_mail.env.dist docker/apache/sf_mail.env
 
-> cp docker/php/sf.env.dist docker/php/sf.env
+> cp docker/php/sf.env.dist docker/php/sf.env  
+  
+> sed -i -e "s/projet/[project_name]/g" docker/docker-compose.yml  
+  
+> sed -i -e "s/nameProjet/[project_name]/g" .env
 
 ## Test
-> echo coucou >> src/index.html
+> echo coucou >> app/index.html
 
 > docker-compose -f docker/docker-compose.yml build
 
