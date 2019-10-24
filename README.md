@@ -1,6 +1,6 @@
 # Projet Docker Web (Juste for working in my project)
 
-debian, php 7.2, apache 2.1, MariaDB 5.5
+debian:jessie-slim, php 7.0.33-1, apache 2.1, MariaDB 5.5
 
 > git clone git@github.com:QuentinBALCEREK/docker.git
 
@@ -11,7 +11,9 @@ debian, php 7.2, apache 2.1, MariaDB 5.5
 
 > cp docker/apache/sf_mail.env.dist docker/apache/sf_mail.env
 
-> cp docker/php/sf.env.dist docker/php/sf.env
+> cp docker/php/sf.env.dist docker/php/sf.env  
+  
+> sed -i -e "s/projet/[project_name]/g" docker/docker-compose.yml
 
 ## Test
 > echo coucou >> src/index.html
