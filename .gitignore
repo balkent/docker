@@ -13,9 +13,9 @@
 ################################
 #  Environement Files
 ################################
-/docker/mysql/sf_mysql.env
-/docker/apache/sf_mail.env
-/docker/php/sf.env
+/docker/sf_mysql.env
+/docker/sf_mail.env
+/docker/sf.env
 
 ################################
 #  Mac Files
