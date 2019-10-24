@@ -2,13 +2,13 @@ version: "3.6"
 
 services:
   http:
-    container_name: projet_http
-    build: apache/
+    container_name: project_name_http
+    build: .
     ports:
       - "10000:80"
     volumes:
-      - ../app:/app
-      - ./bash/.bashrc:/root/.bashrc
+      - ../app:/var/www/html
+      - .bashrc:/root/.bashrc
     environment:
       - ALLOW_OVERRIDE=true
       - SECRET=AAAAAAAAAAAA
@@ -16,31 +16,21 @@ services:
       - frontend
       - backend
     env_file:
-      - ./mysql/sf_mysql.env
-      - ./apache/sf_mail.env
-      - ./php/sf.env
+      - sf_mysql.env
+      - sf_mail.env
+      - sf.env
     links:
-      - php:php
       - db:db
       - maildev:maildev
 
-  php:
-    container_name: projet_php
-    build: php/
-    tty: true
-    volumes:
-      - ../app:/app
-    networks:
-      - backend
-
   db:
-    container_name: projet_db
-    image: mysql:5.5
+    container_name: project_name_db
+    image: mysql:5.7
     volumes:
       - ./volume/mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=projet
+      - MYSQL_DATABASE=project_name
       - MYSQL_USER=user
       - MYSQL_PASSWORD=UnTrucDrole
     ports:
@@ -49,7 +39,7 @@ services:
       - backend
 
   maildev:
-    container_name: projet_mail
+    container_name: project_name_mail
     image: djfarrelly/maildev
     ports:
       - "10002:80"
