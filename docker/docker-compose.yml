@@ -2,18 +2,19 @@ version: "3.6"
 
 services:
   http:
-    container_name: api_http
-    image: httpd:2.4
+    container_name: projet_http
+    build: apache/
     ports:
       - "10000:80"
     volumes:
-      - ../src:/usr/local/apache2/htdocs
+      - ../app:/app
       - ./bash/.bashrc:/root/.bashrc
-      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
-      - ./apache/local.dev.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
     environment:
       - ALLOW_OVERRIDE=true
       - SECRET=AAAAAAAAAAAA
+    networks:
+      - frontend
+      - backend
     env_file:
       - ./mysql/sf_mysql.env
       - ./apache/sf_mail.env
@@ -24,12 +25,16 @@ services:
       - maildev:maildev
 
   php:
-    container_name: api_php
-    image: php:7.2-fpm
+    container_name: projet_php
+    build: php/
     tty: true
+    volumes:
+      - ../app:/app
+    networks:
+      - backend
 
   db:
-    container_name: api_db
+    container_name: projet_db
     image: mysql:5.5
     volumes:
       - ./volume/mysql:/var/lib/mysql
@@ -40,9 +45,15 @@ services:
       - MYSQL_PASSWORD=UnTrucDrole
     ports:
       - "10001:3306"
+    networks:
+      - backend
 
   maildev:
-    container_name: api_mail
+    container_name: projet_mail
     image: djfarrelly/maildev
     ports:
       - "10002:80"
+
+networks:
+  frontend:
+  backend:

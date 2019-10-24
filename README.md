@@ -1,6 +1,8 @@
 # Projet Docker Web (Juste for working in my project)
 
-debian, php 7.2, apache 2.1, MariaDB 5.5
+php:7.2.7-fpm-alpine3.7  
+httpd:2.4.33-alpine  
+MariaDB 5.5  
 
 > git clone git@github.com:QuentinBALCEREK/docker.git
 
